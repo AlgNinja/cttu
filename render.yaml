@@ -33,8 +33,9 @@ services:
   # ============================================================================
   # Frontend Static Site (React + Vite SPA)
   # ============================================================================
-  - type: static
+  - type: web
     name: cttu-frontend
+    runtime: static
     rootDir: frontend
     buildCommand: npm install && npm run build
     staticPublishPath: dist

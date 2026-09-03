@@ -1,0 +1,15 @@
+{
+  "name": "cttu-fullstack",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "docker:up": "docker compose up -d",
+    "docker:down": "docker compose down",
+    "docker:logs": "docker compose logs -f postgres",
+    "db:push": "npm --prefix backend run prisma:push",
+    "db:generate": "npm --prefix backend run prisma:generate",
+    "db:studio": "npm --prefix backend run prisma:studio",
+    "dev:backend": "npm --prefix backend run dev",
+    "dev:frontend": "npm --prefix frontend run dev"
+  }
+}

@@ -10,7 +10,7 @@ services:
     runtime: node
     plan: free
     rootDir: backend
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --no-audit --no-fund && npm run build
     startCommand: npm start
     healthCheckPath: /api/health
     envVars:
@@ -37,7 +37,7 @@ services:
     name: cttu-frontend
     runtime: static
     rootDir: frontend
-    buildCommand: npm install && npm run build
+    buildCommand: npm install --no-audit --no-fund && npm run build
     staticPublishPath: dist
     routes:
       # SPA Rewrite: Ensures client-side routing & page refreshes work properly
@@ -48,8 +48,6 @@ services:
       # Skip Render's automatic pre-install step so it doesn't freeze or run twice
       - key: SKIP_INSTALL_DEPS
         value: "true"
-      - key: NODE_VERSION
-        value: "24.18.0"
 
       # Clerk Publishable Key (embedded into static bundle at build time)
       - key: VITE_CLERK_PUBLISHABLE_KEY

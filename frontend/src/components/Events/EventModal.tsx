@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from '../Common/Modal';
 import { CalendarEvent } from '../../types';
+import { toLocalDatetime } from '../../utils/overlap';
 
 interface EventModalProps {
   isOpen: boolean;
@@ -17,6 +18,7 @@ interface EventModalProps {
   initialData?: CalendarEvent | null;
   defaultStartDate?: string | null;
   defaultEndDate?: string | null;
+  defaultAllDay?: boolean;
 }
 
 const COLOR_PRESETS = [
@@ -35,6 +37,7 @@ export const EventModal: React.FC<EventModalProps> = ({
   initialData,
   defaultStartDate,
   defaultEndDate,
+  defaultAllDay,
 }) => {
   const [title, setTitle] = useState('');
   const [description, setDescription] = useState('');
@@ -50,8 +53,8 @@ export const EventModal: React.FC<EventModalProps> = ({
     if (initialData) {
       setTitle(initialData.title);
       setDescription(initialData.description || '');
-      setStartDate(new Date(initialData.startDate).toISOString().slice(0, 16));
-      setEndDate(new Date(initialData.endDate).toISOString().slice(0, 16));
+      setStartDate(toLocalDatetime(initialData.startDate));
+      setEndDate(toLocalDatetime(initialData.endDate));
       setAllDay(initialData.allDay);
       setLocation(initialData.location || '');
       setColor(initialData.color || '#3B82F6');
@@ -65,14 +68,14 @@ export const EventModal: React.FC<EventModalProps> = ({
 
       setTitle('');
       setDescription('');
-      setStartDate(defaultStart.toISOString().slice(0, 16));
-      setEndDate(defaultEnd.toISOString().slice(0, 16));
-      setAllDay(false);
+      setStartDate(toLocalDatetime(defaultStart));
+      setEndDate(toLocalDatetime(defaultEnd));
+      setAllDay(Boolean(defaultAllDay));
       setLocation('');
       setColor('#3B82F6');
     }
     setError(null);
-  }, [initialData, defaultStartDate, defaultEndDate, isOpen]);
+  }, [initialData, defaultStartDate, defaultEndDate, defaultAllDay, isOpen]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

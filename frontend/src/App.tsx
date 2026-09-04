@@ -16,6 +16,7 @@ import {
   Priority,
 } from './types';
 import { AlertCircle } from 'lucide-react';
+import { findConflictingItem } from './utils/overlap';
 
 export function App() {
   const { isLoaded, isSignedIn } = useAuth();
@@ -60,13 +61,36 @@ export function App() {
     title: string;
     description?: string | null;
     dueDate?: string | null;
+    allDay?: boolean;
     priority: Priority;
   }) => {
+    if (data.dueDate && !data.allDay) {
+      const dueDate = new Date(data.dueDate);
+      const start = dueDate;
+      const end = new Date(dueDate.getTime() + 30 * 60 * 1000);
+      const conflict = findConflictingItem(start, end, calendarItems);
+      if (conflict) {
+        throw new Error(
+          `Cannot schedule task: due time conflicts with "${conflict.cleanTitle}" (${conflict.formattedTime}). Overlapping items are not allowed.`
+        );
+      }
+    }
     await api.createTodo(data);
     await fetchData();
   };
 
   const handleUpdateTodo = async (id: string, data: Partial<Todo>) => {
+    if (data.dueDate && !data.allDay) {
+      const dueDate = new Date(data.dueDate);
+      const start = dueDate;
+      const end = new Date(dueDate.getTime() + 30 * 60 * 1000);
+      const conflict = findConflictingItem(start, end, calendarItems, id);
+      if (conflict) {
+        throw new Error(
+          `Cannot update task: due time conflicts with "${conflict.cleanTitle}" (${conflict.formattedTime}). Overlapping items are not allowed.`
+        );
+      }
+    }
     await api.updateTodo(id, data);
     await fetchData();
   };
@@ -91,11 +115,31 @@ export function App() {
     location?: string | null;
     color?: string;
   }) => {
+    if (!data.allDay) {
+      const start = new Date(data.startDate);
+      const end = new Date(data.endDate);
+      const conflict = findConflictingItem(start, end, calendarItems);
+      if (conflict) {
+        throw new Error(
+          `Cannot schedule event: time conflicts with "${conflict.cleanTitle}" (${conflict.formattedTime}). Overlapping items are not allowed.`
+        );
+      }
+    }
     await api.createEvent(data);
     await fetchData();
   };
 
   const handleUpdateEvent = async (id: string, data: Partial<CalendarEvent>) => {
+    if (data.startDate && data.endDate && !data.allDay) {
+      const start = new Date(data.startDate);
+      const end = new Date(data.endDate);
+      const conflict = findConflictingItem(start, end, calendarItems, id);
+      if (conflict) {
+        throw new Error(
+          `Cannot update event: time conflicts with "${conflict.cleanTitle}" (${conflict.formattedTime}). Overlapping items are not allowed.`
+        );
+      }
+    }
     await api.updateEvent(id, data);
     await fetchData();
   };
@@ -114,11 +158,29 @@ export function App() {
     category?: string;
     color?: string;
   }) => {
+    const start = new Date(data.startTime);
+    const end = new Date(data.endTime);
+    const conflict = findConflictingItem(start, end, calendarItems);
+    if (conflict) {
+      throw new Error(
+        `Cannot block time chunk: conflicts with "${conflict.cleanTitle}" (${conflict.formattedTime}). Overlapping items are not allowed.`
+      );
+    }
     await api.createTimeChunk(data);
     await fetchData();
   };
 
   const handleUpdateTimeChunk = async (id: string, data: Partial<TimeChunk>) => {
+    if (data.startTime && data.endTime) {
+      const start = new Date(data.startTime);
+      const end = new Date(data.endTime);
+      const conflict = findConflictingItem(start, end, calendarItems, id);
+      if (conflict) {
+        throw new Error(
+          `Cannot update time chunk: conflicts with "${conflict.cleanTitle}" (${conflict.formattedTime}). Overlapping items are not allowed.`
+        );
+      }
+    }
     await api.updateTimeChunk(id, data);
     await fetchData();
   };

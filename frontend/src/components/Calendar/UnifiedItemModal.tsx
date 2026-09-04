@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Modal } from '../Common/Modal';
 import { UnifiedCalendarItem, Todo, CalendarEvent, TimeChunk, Priority } from '../../types';
 import { Trash2, CheckCircle2, Circle, Clock, MapPin, Tag } from 'lucide-react';
+import { toLocalDatetime } from '../../utils/overlap';
 
 interface UnifiedItemModalProps {
   isOpen: boolean;
@@ -51,8 +52,8 @@ export const UnifiedItemModal: React.FC<UnifiedItemModalProps> = ({
       setError(null);
       setTitle(item.title.replace(/^[✓☐\s]+/, '').replace(/^⚡\s*\[.*?\]\s*/, ''));
       setDescription(item.description || '');
-      setStartDate(item.start ? new Date(item.start).toISOString().slice(0, 16) : '');
-      setEndDate(item.end ? new Date(item.end).toISOString().slice(0, 16) : '');
+      setStartDate(item.start ? toLocalDatetime(item.start) : '');
+      setEndDate(item.end ? toLocalDatetime(item.end) : '');
       setAllDay(item.allDay);
       setColor(item.color);
 

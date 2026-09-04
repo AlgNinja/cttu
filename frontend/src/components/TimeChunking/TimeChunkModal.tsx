@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Modal } from '../Common/Modal';
 import { TimeChunk, TimeChunkCategory } from '../../types';
+import { toLocalDatetime } from '../../utils/overlap';
 
 interface TimeChunkModalProps {
   isOpen: boolean;
@@ -49,8 +50,8 @@ export const TimeChunkModal: React.FC<TimeChunkModalProps> = ({
     if (initialData) {
       setTitle(initialData.title);
       setDescription(initialData.description || '');
-      setStartTime(new Date(initialData.startTime).toISOString().slice(0, 16));
-      setEndTime(new Date(initialData.endTime).toISOString().slice(0, 16));
+      setStartTime(toLocalDatetime(initialData.startTime));
+      setEndTime(toLocalDatetime(initialData.endTime));
       setCategory(initialData.category);
       setColor(initialData.color || '#8B5CF6');
     } else {
@@ -65,8 +66,8 @@ export const TimeChunkModal: React.FC<TimeChunkModalProps> = ({
 
       setTitle('');
       setDescription('');
-      setStartTime(start.toISOString().slice(0, 16));
-      setEndTime(end.toISOString().slice(0, 16));
+      setStartTime(toLocalDatetime(start));
+      setEndTime(toLocalDatetime(end));
       setCategory('FOCUS');
       setColor('#8B5CF6');
     }

@@ -1,5 +1,6 @@
 import React from 'react';
-import { KeyRound, ExternalLink, CheckCircle, Database } from 'lucide-react';
+import { SignInButton } from '@clerk/clerk-react';
+import { KeyRound, ExternalLink, Database, ArrowRight } from 'lucide-react';
 
 export const SetupBanner: React.FC = () => {
   const clerkKey = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY;
@@ -90,25 +91,13 @@ export const WelcomeHero: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-10 p-6 bg-slate-100/70 rounded-2xl border border-slate-200 text-left max-w-2xl mx-auto">
-        <h4 className="text-sm font-bold text-slate-800 flex items-center gap-2">
-          <CheckCircle size={16} className="text-emerald-600" />
-          How to get started:
-        </h4>
-        <ol className="list-decimal list-inside text-xs text-slate-600 space-y-2 mt-2">
-          <li>
-            Start the PostgreSQL database container with{' '}
-            <code className="px-1.5 py-0.5 bg-white rounded-sm font-mono border border-slate-200">
-              docker compose up -d
-            </code>
-          </li>
-          <li>
-            Paste your Clerk keys into <code className="px-1.5 py-0.5 bg-white rounded-sm font-mono border border-slate-200">frontend/.env</code> and <code className="px-1.5 py-0.5 bg-white rounded-sm font-mono border border-slate-200">backend/.env</code>
-          </li>
-          <li>
-            Click <strong>Sign In with Clerk</strong> at the top right to log into your personal workspace!
-          </li>
-        </ol>
+      <div className="mt-10 flex items-center justify-center">
+        <SignInButton mode="modal">
+          <button className="px-6 py-3 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer">
+            <span>Get Started</span>
+            <ArrowRight size={16} />
+          </button>
+        </SignInButton>
       </div>
     </div>
   );

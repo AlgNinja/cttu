@@ -159,7 +159,7 @@ export function App() {
                 <div>
                   <div className="font-semibold text-sm">Backend Connection Notice</div>
                   <div className="text-xs mt-0.5">
-                    {apiError}. Make sure the Docker PostgreSQL container and backend Express server are running.
+                    {apiError}. Make sure your database and backend server are running.
                   </div>
                 </div>
               </div>

@@ -38,6 +38,13 @@ export function createApiClient(getToken: () => Promise<string | null>) {
       );
     }
 
+    const contentType = response.headers.get('content-type');
+    if (contentType && !contentType.includes('application/json')) {
+      throw new Error(
+        `API returned HTML instead of JSON. Check that VITE_API_URL points to your backend web service (${API_BASE}) and not your frontend.`
+      );
+    }
+
     return response.json();
   }
 

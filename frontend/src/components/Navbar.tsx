@@ -73,11 +73,11 @@ export const Navbar: React.FC<NavbarProps> = ({
               <Sparkles size={20} />
             </div>
             <div>
-              <span className="font-bold text-base sm:text-lg text-slate-900 tracking-tight block leading-tight">
-                FocusFlow
+              <span className="font-extrabold text-lg sm:text-xl text-slate-900 tracking-tight block leading-tight">
+                CTTU
               </span>
-              <span className="text-[11px] font-medium text-slate-500">
-                Tasks • Events • Time Chunks
+              <span className="text-[10px] sm:text-[11px] font-medium text-slate-500 block leading-tight">
+                Calendar, Todo, Time Chunk, Upcoming Events
               </span>
             </div>
           </div>

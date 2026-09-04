@@ -17,21 +17,20 @@
     "@fullcalendar/react": "^6.1.21",
     "@fullcalendar/timegrid": "^6.1.21",
     "@tailwindcss/vite": "^4.3.3",
-    "date-fns": "^4.4.0",
-    "lucide-react": "^1.40.0",
-    "react": "^19.2.8",
-    "react-dom": "^19.2.8",
-    "tailwindcss": "^4.3.3"
-  },
-  "devDependencies": {
     "@types/node": "^24.13.3",
     "@types/react": "^19.2.18",
     "@types/react-dom": "^19.2.4",
     "@vitejs/plugin-react": "^6.1.0",
+    "date-fns": "^4.4.0",
+    "lucide-react": "^1.40.0",
     "oxlint": "^1.79.0",
+    "react": "^19.2.8",
+    "react-dom": "^19.2.8",
+    "tailwindcss": "^4.3.3",
     "typescript": "~6.0.2",
     "vite": "^8.2.2"
   },
+  "devDependencies": {},
   "allowScripts": {
     "@clerk/shared@3.47.8": true
   }

@@ -45,6 +45,12 @@ services:
         source: /*
         destination: /index.html
     envVars:
+      # Skip Render's automatic pre-install step so it doesn't freeze or run twice
+      - key: SKIP_INSTALL_DEPS
+        value: "true"
+      - key: NODE_VERSION
+        value: "24.18.0"
+
       # Clerk Publishable Key (embedded into static bundle at build time)
       - key: VITE_CLERK_PUBLISHABLE_KEY
         sync: false

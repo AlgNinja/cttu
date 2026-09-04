@@ -52,37 +52,37 @@ export const SetupBanner: React.FC = () => {
 
 export const WelcomeHero: React.FC = () => {
   return (
-    <div className="max-w-4xl mx-auto py-12 px-4 text-center">
-      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-semibold mb-4">
-        <Database size={13} />
-        PostgreSQL & Express Backend • React & TypeScript • Clerk Auth
+    <div className="max-w-4xl mx-auto py-8 sm:py-12 px-3 sm:px-4 text-center">
+      <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-indigo-50 border border-indigo-100 text-indigo-700 text-xs font-semibold mb-4 max-w-full truncate">
+        <Database size={13} className="shrink-0" />
+        <span className="truncate">PostgreSQL & Express Backend • React & TypeScript • Clerk Auth</span>
       </div>
-      <h1 className="text-4xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
+      <h1 className="text-3xl sm:text-5xl font-extrabold text-slate-900 tracking-tight leading-tight">
         All Your Tasks, Events & Focus Blocks{' '}
         <span className="text-transparent bg-clip-text bg-linear-to-r from-indigo-600 via-purple-600 to-pink-600">
           on One Interactive Calendar
         </span>
       </h1>
-      <p className="text-base sm:text-lg text-slate-600 max-w-2xl mx-auto mt-4 mb-8">
+      <p className="text-sm sm:text-lg text-slate-600 max-w-2xl mx-auto mt-3 sm:mt-4 mb-6 sm:mb-8">
         Organize todos with due dates, schedule upcoming meetings, and chunk your daily focus time with Pomodoro-ready blocks. Everything is securely isolated to your account.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-6 max-w-3xl mx-auto text-left mt-10">
-        <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3.5 sm:gap-6 max-w-3xl mx-auto text-left mt-6 sm:mt-10">
+        <div className="p-4 sm:p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
           <div className="text-2xl mb-2">☑️</div>
           <h3 className="text-base font-semibold text-slate-800">Tasks & Due Dates</h3>
           <p className="text-xs text-slate-500 mt-1">
             Priorities, deadlines, overdue alerts, and completion tracking.
           </p>
         </div>
-        <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+        <div className="p-4 sm:p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
           <div className="text-2xl mb-2">🎪</div>
           <h3 className="text-base font-semibold text-slate-800">Upcoming Events</h3>
           <p className="text-xs text-slate-500 mt-1">
             Track meetings and deadlines with custom colors and locations.
           </p>
         </div>
-        <div className="p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
+        <div className="p-4 sm:p-5 bg-white rounded-2xl border border-slate-200 shadow-xs">
           <div className="text-2xl mb-2">⚡</div>
           <h3 className="text-base font-semibold text-slate-800">Time Chunking</h3>
           <p className="text-xs text-slate-500 mt-1">
@@ -91,7 +91,7 @@ export const WelcomeHero: React.FC = () => {
         </div>
       </div>
 
-      <div className="mt-10 flex items-center justify-center">
+      <div className="mt-8 sm:mt-10 flex items-center justify-center">
         <SignInButton mode="modal">
           <button className="px-6 py-3 text-sm font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-xl shadow-md transition-all flex items-center gap-2 cursor-pointer">
             <span>Get Started</span>

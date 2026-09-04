@@ -326,9 +326,9 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
   return (
     <div className="space-y-4 max-w-7xl mx-auto">
       {/* Calendar Filter Toolbar */}
-      <div className="flex flex-wrap items-center justify-between gap-4 p-4 bg-white rounded-2xl border border-slate-200 shadow-xs">
-        <div className="flex flex-wrap items-center gap-3">
-          <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 mr-1">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 sm:p-4 bg-white rounded-2xl border border-slate-200 shadow-xs">
+        <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+          <span className="text-xs font-semibold uppercase tracking-wider text-slate-500 mr-1 hidden sm:inline">
             Display:
           </span>
 
@@ -336,53 +336,56 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
           <button
             type="button"
             onClick={() => setShowTodos(!showTodos)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
               showTodos
                 ? 'bg-amber-100 text-amber-900 ring-1 ring-amber-300'
                 : 'bg-slate-100 text-slate-400 hover:bg-slate-200'
             }`}
           >
             <CheckSquare size={14} className={showTodos ? 'text-amber-700' : 'text-slate-400'} />
-            Tasks (Due Dates)
+            <span>Tasks</span>
+            <span className="hidden sm:inline"> (Due Dates)</span>
           </button>
 
           {/* Event Filter Toggle */}
           <button
             type="button"
             onClick={() => setShowEvents(!showEvents)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
               showEvents
                 ? 'bg-blue-100 text-blue-900 ring-1 ring-blue-300'
                 : 'bg-slate-100 text-slate-400 hover:bg-slate-200'
             }`}
           >
             <CalendarIcon size={14} className={showEvents ? 'text-blue-700' : 'text-slate-400'} />
-            Upcoming Events
+            <span className="sm:hidden">Events</span>
+            <span className="hidden sm:inline">Upcoming Events</span>
           </button>
 
           {/* Time Chunk Filter Toggle */}
           <button
             type="button"
             onClick={() => setShowTimeChunks(!showTimeChunks)}
-            className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
+            className={`flex items-center gap-1.5 px-2.5 sm:px-3 py-1.5 rounded-lg text-xs font-medium transition-all ${
               showTimeChunks
                 ? 'bg-purple-100 text-purple-900 ring-1 ring-purple-300'
                 : 'bg-slate-100 text-slate-400 hover:bg-slate-200'
             }`}
           >
             <Zap size={14} className={showTimeChunks ? 'text-purple-700' : 'text-slate-400'} />
-            Time Chunks
+            <span className="sm:hidden">Focus</span>
+            <span className="hidden sm:inline">Time Chunks</span>
           </button>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-2 w-full sm:w-auto">
           <button
             type="button"
             onClick={() => {
               setClickedDate(new Date().toISOString());
               setSlotChoiceModalOpen(true);
             }}
-            className="px-3.5 py-1.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-xs transition-colors flex items-center gap-1"
+            className="w-full sm:w-auto justify-center px-3.5 py-1.5 text-xs font-semibold text-white bg-indigo-600 hover:bg-indigo-700 rounded-lg shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
           >
             <Plus size={15} />
             Quick Add
@@ -391,7 +394,7 @@ export const CalendarView: React.FC<CalendarViewProps> = ({
       </div>
 
       {/* Main FullCalendar container */}
-      <div className="bg-white p-6 rounded-2xl border border-slate-200 shadow-xs min-h-[500px]">
+      <div className="bg-white p-2.5 sm:p-6 rounded-2xl border border-slate-200 shadow-xs min-h-[500px]">
         <ErrorBoundary fallbackTitle="Calendar Component Error">
           <FullCalendar
             plugins={[dayGridPlugin, timeGridPlugin, interactionPlugin] as any}

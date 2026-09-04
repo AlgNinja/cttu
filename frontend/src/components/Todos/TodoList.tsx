@@ -130,22 +130,22 @@ export const TodoList: React.FC<TodoListProps> = ({
       {/* Quick Add Bar */}
       <form
         onSubmit={handleQuickAdd}
-        className="flex items-center gap-2 p-2 bg-white rounded-xl shadow-xs border border-slate-200"
+        className="flex items-center gap-1.5 sm:gap-2 p-1.5 sm:p-2 bg-white rounded-xl shadow-xs border border-slate-200"
       >
         <input
           type="text"
           value={quickTitle}
           onChange={(e) => setQuickTitle(e.target.value)}
-          placeholder="Add a new task... (press Enter or use + New Task for due dates)"
-          className="flex-1 px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden"
+          placeholder="Add a task... (press Enter)"
+          className="flex-1 min-w-0 px-2.5 sm:px-3 py-2 text-sm text-slate-800 placeholder-slate-400 focus:outline-hidden"
         />
         <button
           type="submit"
           disabled={!quickTitle.trim()}
-          className="px-4 py-2 text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 rounded-lg transition-colors flex items-center gap-1"
+          className="px-3 sm:px-4 py-2 text-xs sm:text-sm font-medium text-white bg-indigo-600 hover:bg-indigo-700 disabled:opacity-40 rounded-lg transition-colors flex items-center gap-1 shrink-0 cursor-pointer"
         >
-          <Plus size={16} />
-          Add
+          <Plus size={15} />
+          <span>Add</span>
         </button>
         <button
           type="button"
@@ -153,18 +153,18 @@ export const TodoList: React.FC<TodoListProps> = ({
             setEditingTodo(null);
             setModalOpen(true);
           }}
-          className="px-3 py-2 text-sm font-medium text-indigo-600 hover:bg-indigo-50 rounded-lg border border-indigo-200 transition-colors"
+          className="px-2.5 sm:px-3 py-2 text-xs sm:text-sm font-medium text-indigo-600 hover:bg-indigo-50 rounded-lg border border-indigo-200 transition-colors shrink-0 cursor-pointer"
         >
           Detailed
         </button>
       </form>
 
       {/* Filters and Counters */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex items-center gap-1 bg-slate-100 p-1 rounded-lg">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="grid grid-cols-3 sm:flex items-center gap-1 bg-slate-100 p-1 rounded-lg w-full sm:w-auto">
           <button
             onClick={() => setFilter('all')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
+            className={`px-2 sm:px-3 py-1.5 text-xs font-medium rounded-md transition-all text-center ${
               filter === 'all'
                 ? 'bg-white text-slate-900 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
@@ -174,7 +174,7 @@ export const TodoList: React.FC<TodoListProps> = ({
           </button>
           <button
             onClick={() => setFilter('pending')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
+            className={`px-2 sm:px-3 py-1.5 text-xs font-medium rounded-md transition-all text-center ${
               filter === 'pending'
                 ? 'bg-white text-slate-900 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
@@ -184,17 +184,17 @@ export const TodoList: React.FC<TodoListProps> = ({
           </button>
           <button
             onClick={() => setFilter('completed')}
-            className={`px-3 py-1.5 text-xs font-medium rounded-md transition-all ${
+            className={`px-2 sm:px-3 py-1.5 text-xs font-medium rounded-md transition-all text-center ${
               filter === 'completed'
                 ? 'bg-white text-slate-900 shadow-xs'
                 : 'text-slate-600 hover:text-slate-900'
             }`}
           >
-            Completed ({todos.filter((t) => t.completed).length})
+            Done ({todos.filter((t) => t.completed).length})
           </button>
         </div>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center justify-end gap-2">
           <label className="text-xs text-slate-500 font-medium">Priority:</label>
           <select
             value={priorityFilter}
@@ -236,17 +236,17 @@ export const TodoList: React.FC<TodoListProps> = ({
           {filteredTodos.map((todo) => (
             <div
               key={todo.id}
-              className={`group flex items-start justify-between gap-3 p-4 bg-white rounded-xl border transition-all hover:shadow-xs ${
+              className={`group flex items-start justify-between gap-2.5 sm:gap-3 p-3 sm:p-4 bg-white rounded-xl border transition-all hover:shadow-xs ${
                 todo.completed
                   ? 'border-slate-100 bg-slate-50/40 opacity-75'
                   : 'border-slate-200 hover:border-indigo-200'
               }`}
             >
-              <div className="flex items-start gap-3 flex-1 min-w-0">
+              <div className="flex items-start gap-2.5 sm:gap-3 flex-1 min-w-0">
                 <button
                   type="button"
                   onClick={() => onToggleTodo(todo.id)}
-                  className="mt-0.5 text-slate-400 hover:text-indigo-600 transition-colors shrink-0"
+                  className="mt-0.5 text-slate-400 hover:text-indigo-600 transition-colors shrink-0 p-0.5"
                 >
                   {todo.completed ? (
                     <CheckCircle2 size={20} className="text-emerald-500 fill-emerald-50" />
@@ -256,7 +256,7 @@ export const TodoList: React.FC<TodoListProps> = ({
                 </button>
 
                 <div className="space-y-1 flex-1 min-w-0">
-                  <div className="flex flex-wrap items-center gap-2">
+                  <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                     <span
                       className={`text-sm font-medium ${
                         todo.completed
@@ -287,20 +287,20 @@ export const TodoList: React.FC<TodoListProps> = ({
                 </div>
               </div>
 
-              <div className="flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+              <div className="flex items-center gap-0.5 sm:gap-1 opacity-100 sm:opacity-80 sm:group-hover:opacity-100 transition-opacity shrink-0">
                 <button
                   onClick={() => {
                     setEditingTodo(todo);
                     setModalOpen(true);
                   }}
-                  className="p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors"
+                  className="p-1.5 sm:p-1.5 text-slate-400 hover:text-indigo-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
                   title="Edit task"
                 >
                   <Edit2 size={15} />
                 </button>
                 <button
                   onClick={() => onDeleteTodo(todo.id)}
-                  className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                  className="p-1.5 sm:p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                   title="Delete task"
                 >
                   <Trash2 size={15} />

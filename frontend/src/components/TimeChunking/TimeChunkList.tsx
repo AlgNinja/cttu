@@ -79,41 +79,41 @@ export const TimeChunkList: React.FC<TimeChunkListProps> = ({
   return (
     <div className="space-y-6 max-w-4xl mx-auto">
       {/* Quick Summary / Header Banner */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4">
-        <div className="p-4 bg-purple-50/70 border border-purple-100 rounded-2xl flex items-center gap-3.5">
-          <div className="w-11 h-11 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-xs">
-            <Zap size={22} />
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-2.5 sm:gap-4">
+        <div className="p-3 sm:p-4 bg-purple-50/70 border border-purple-100 rounded-2xl flex items-center gap-2.5 sm:gap-3.5">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 bg-purple-600 text-white rounded-xl flex items-center justify-center shadow-xs shrink-0">
+            <Zap size={18} className="sm:w-[22px] sm:h-[22px]" />
           </div>
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-purple-600">
-              Focus Scheduled Today
+          <div className="min-w-0">
+            <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-purple-600 truncate">
+              Scheduled Today
             </div>
-            <div className="text-xl font-bold text-slate-800">
+            <div className="text-lg sm:text-xl font-bold text-slate-800">
               {formatDuration(totalMinutesToday)}
             </div>
           </div>
         </div>
 
-        <div className="p-4 bg-emerald-50/70 border border-emerald-100 rounded-2xl flex items-center gap-3.5">
-          <div className="w-11 h-11 bg-emerald-600 text-white rounded-xl flex items-center justify-center shadow-xs">
-            <Flame size={22} />
+        <div className="p-3 sm:p-4 bg-emerald-50/70 border border-emerald-100 rounded-2xl flex items-center gap-2.5 sm:gap-3.5">
+          <div className="w-9 h-9 sm:w-11 sm:h-11 bg-emerald-600 text-white rounded-xl flex items-center justify-center shadow-xs shrink-0">
+            <Flame size={18} className="sm:w-[22px] sm:h-[22px]" />
           </div>
-          <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-emerald-600">
-              Completed Today
+          <div className="min-w-0">
+            <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-emerald-600 truncate">
+              Done Today
             </div>
-            <div className="text-xl font-bold text-slate-800">
+            <div className="text-lg sm:text-xl font-bold text-slate-800">
               {formatDuration(completedMinutesToday)}
             </div>
           </div>
         </div>
 
-        <div className="p-4 bg-blue-50/70 border border-blue-100 rounded-2xl flex items-center justify-between">
+        <div className="col-span-2 sm:col-span-1 p-3 sm:p-4 bg-blue-50/70 border border-blue-100 rounded-2xl flex items-center justify-between">
           <div>
-            <div className="text-xs font-semibold uppercase tracking-wider text-blue-600">
+            <div className="text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-blue-600">
               Active Time Blocks
             </div>
-            <div className="text-xl font-bold text-slate-800">
+            <div className="text-lg sm:text-xl font-bold text-slate-800">
               {timeChunks.length} Total
             </div>
           </div>
@@ -123,22 +123,22 @@ export const TimeChunkList: React.FC<TimeChunkListProps> = ({
               setEditingChunk(null);
               setModalOpen(true);
             }}
-            className="p-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-xl shadow-xs transition-colors flex items-center justify-center"
+            className="p-2 sm:p-2.5 bg-purple-600 hover:bg-purple-700 text-white rounded-xl shadow-xs transition-colors flex items-center justify-center cursor-pointer"
             title="Block out new time chunk"
           >
-            <Plus size={20} />
+            <Plus size={18} />
           </button>
         </div>
       </div>
 
       {/* Controls & Category Filter */}
-      <div className="flex flex-wrap items-center justify-between gap-4">
-        <div className="flex flex-wrap items-center gap-1.5">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
+        <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none w-full sm:w-auto">
           {['ALL', 'FOCUS', 'WORK', 'STUDY', 'MEETING', 'BREAK', 'EXERCISE'].map((cat) => (
             <button
               key={cat}
               onClick={() => setCategoryFilter(cat)}
-              className={`px-3 py-1.5 text-xs font-medium rounded-lg transition-all ${
+              className={`px-2.5 sm:px-3 py-1.5 text-xs font-medium rounded-lg transition-all shrink-0 cursor-pointer ${
                 categoryFilter === cat
                   ? 'bg-purple-600 text-white shadow-xs'
                   : 'bg-white text-slate-600 hover:bg-slate-50 border border-slate-200'
@@ -155,7 +155,7 @@ export const TimeChunkList: React.FC<TimeChunkListProps> = ({
             setEditingChunk(null);
             setModalOpen(true);
           }}
-          className="px-4 py-2 text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 rounded-lg shadow-xs transition-colors flex items-center gap-1.5"
+          className="w-full sm:w-auto justify-center px-4 py-2 text-sm font-medium text-white bg-purple-600 hover:bg-purple-700 rounded-lg shadow-xs transition-colors flex items-center gap-1.5 cursor-pointer"
         >
           <Plus size={16} />
           Block Time Chunk
@@ -202,23 +202,23 @@ export const TimeChunkList: React.FC<TimeChunkListProps> = ({
             return (
               <div
                 key={chunk.id}
-                className={`group flex items-start justify-between gap-4 p-4 bg-white rounded-xl border transition-all hover:shadow-xs ${
+                className={`group flex items-start justify-between gap-3 sm:gap-4 p-3 sm:p-4 bg-white rounded-xl border transition-all hover:shadow-xs ${
                   chunk.completed
                     ? 'border-slate-100 bg-slate-50/40 opacity-75'
                     : 'border-slate-200 hover:border-purple-300'
                 }`}
               >
-                <div className="flex items-start gap-3.5 flex-1 min-w-0">
+                <div className="flex items-start gap-2.5 sm:gap-3.5 flex-1 min-w-0">
                   <button
                     type="button"
                     onClick={() => onToggleTimeChunk(chunk.id)}
-                    className="mt-0.5 text-slate-400 hover:text-purple-600 transition-colors shrink-0"
+                    className="mt-0.5 text-slate-400 hover:text-purple-600 transition-colors shrink-0 p-0.5"
                     title={chunk.completed ? 'Mark incomplete' : 'Mark chunk completed'}
                   >
                     {chunk.completed ? (
-                      <CheckCircle2 size={22} className="text-emerald-500 fill-emerald-50" />
+                      <CheckCircle2 size={20} className="text-emerald-500 fill-emerald-50" />
                     ) : (
-                      <Circle size={22} />
+                      <Circle size={20} />
                     )}
                   </button>
 
@@ -228,7 +228,7 @@ export const TimeChunkList: React.FC<TimeChunkListProps> = ({
                   />
 
                   <div className="space-y-1 flex-1 min-w-0">
-                    <div className="flex flex-wrap items-center gap-2">
+                    <div className="flex flex-wrap items-center gap-1.5 sm:gap-2">
                       <span
                         className={`text-sm font-semibold ${
                           chunk.completed
@@ -239,7 +239,7 @@ export const TimeChunkList: React.FC<TimeChunkListProps> = ({
                         {chunk.title}
                       </span>
                       <span
-                        className="px-2 py-0.5 text-[11px] font-semibold uppercase tracking-wider rounded-md text-white"
+                        className="px-2 py-0.5 text-[10px] sm:text-[11px] font-semibold uppercase tracking-wider rounded-md text-white"
                         style={{ backgroundColor: chunk.color || '#8B5CF6' }}
                       >
                         {chunk.category}
@@ -250,8 +250,8 @@ export const TimeChunkList: React.FC<TimeChunkListProps> = ({
                     </div>
 
                     <div className="flex items-center gap-1.5 text-xs text-slate-500">
-                      <Clock size={13} className="text-slate-400" />
-                      <span>
+                      <Clock size={13} className="text-slate-400 shrink-0" />
+                      <span className="truncate">
                         {start.toLocaleDateString(undefined, {
                           weekday: 'short',
                           month: 'short',
@@ -278,20 +278,20 @@ export const TimeChunkList: React.FC<TimeChunkListProps> = ({
                   </div>
                 </div>
 
-                <div className="flex items-center gap-1 opacity-80 group-hover:opacity-100 transition-opacity">
+                <div className="flex items-center gap-0.5 sm:gap-1 opacity-100 sm:opacity-80 sm:group-hover:opacity-100 transition-opacity shrink-0">
                   <button
                     onClick={() => {
                       setEditingChunk(chunk);
                       setModalOpen(true);
                     }}
-                    className="p-1.5 text-slate-400 hover:text-purple-600 hover:bg-slate-100 rounded-lg transition-colors"
+                    className="p-1.5 text-slate-400 hover:text-purple-600 hover:bg-slate-100 rounded-lg transition-colors cursor-pointer"
                     title="Edit time chunk"
                   >
                     <Edit2 size={15} />
                   </button>
                   <button
                     onClick={() => onDeleteTimeChunk(chunk.id)}
-                    className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors"
+                    className="p-1.5 text-slate-400 hover:text-red-600 hover:bg-red-50 rounded-lg transition-colors cursor-pointer"
                     title="Delete time chunk"
                   >
                     <Trash2 size={15} />
